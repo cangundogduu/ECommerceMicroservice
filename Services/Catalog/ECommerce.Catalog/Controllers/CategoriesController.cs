@@ -25,5 +25,32 @@ namespace ECommerce.Catalog.Controllers
             await _categoryService.CreateAsync(category);
             return Ok(category);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var category = await _categoryService.GetByIdAsync(id);
+            if (category == null)
+            {
+                return BadRequest("Category not found");
+            }
+            return Ok(category);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateCategoryDto updateCategoryDto)
+        {
+            var category = updateCategoryDto.Adapt<Category>();
+            await _categoryService.UpdateAsync(category);
+            return Ok("Category update successfully. ");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+           
+            await _categoryService.DeleteAsync(id);
+            return Ok("Category deleted successfully.");
+        }
     }
 }
