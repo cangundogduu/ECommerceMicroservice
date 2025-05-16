@@ -10,7 +10,13 @@ namespace ECommerce.Order.Domain.Entities
     {
         public int OrderingId { get; set; }
         public string UserId { get; set; }
-        public decimal TotalPrice => OrderDetails.Sum(x => x.ProductPrice * x.Quantity);
+        public decimal TotalPrice 
+        { 
+            get
+            {
+               return OrderDetails?.Sum(x => x.ProductPrice * x.Quantity)?? 0 ;
+            } 
+        } 
         public DateTime OrderDate { get; set; }
 
 
