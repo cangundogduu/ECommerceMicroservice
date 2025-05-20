@@ -1,10 +1,12 @@
 using ECommerce.Basket.Services;
+using ECommerce.Basket.Services.BasketServices;
 using ECommerce.Basket.Settings;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection(nameof(RedisSettings)));
 
 builder.Services.AddSingleton<RedisService>(sp =>
@@ -39,4 +41,4 @@ app.MapControllers();
 
 app.Run();
 
-//1.28 waiting.(Lesson 59)
+

@@ -1,2 +1,6 @@
-Catalog => https://localhost:7000
-Discount => https://localhost:7001
+Catalog			=> https://localhost:7000
+Discount		=> https://localhost:7001
+
+
+
+IdentityServer	=>https://localhost:5001
