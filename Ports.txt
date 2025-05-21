@@ -1,6 +1,6 @@
 Catalog			=> https://localhost:7000
 Discount		=> https://localhost:7001
-
-
-
-IdentityServer	=>https://localhost:5001
+Basket			=> https://localhost:7002
+Order			=> https://localhost:7003
+Message			=> https://localhost:7004
+IdentityServer	=> https://localhost:5001
