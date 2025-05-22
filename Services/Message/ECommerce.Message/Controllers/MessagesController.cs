@@ -1,10 +1,12 @@
 ﻿using ECommerce.Message.DTOs;
 using ECommerce.Message.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Message.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MessagesController(IUserMessageService _userMessageService) : ControllerBase
