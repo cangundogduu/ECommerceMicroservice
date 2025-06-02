@@ -1,21 +1,16 @@
 using ECommerce.WebUI.Models;
+using ECommerce.WebUI.Services.CatalogServices.ProductServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace ECommerce.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IProductService _productService) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Index()
         {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
+            var products = await _productService.GetAllAsync();
+            return View(products);
         }
 
         public IActionResult Privacy()

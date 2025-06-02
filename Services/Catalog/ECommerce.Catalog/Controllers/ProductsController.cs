@@ -2,11 +2,13 @@
 using ECommerce.Catalog.Entities;
 using ECommerce.Catalog.Services.ProductServices;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Catalog.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController(IProductService _productService) : ControllerBase
@@ -19,6 +21,7 @@ namespace ECommerce.Catalog.Controllers
             return Ok(values);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateProductDto productDto)
         {
@@ -40,6 +43,7 @@ namespace ECommerce.Catalog.Controllers
 
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateProductDto updateProductDto)
         {
@@ -50,6 +54,7 @@ namespace ECommerce.Catalog.Controllers
             return Ok("Product update successfully. ");
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {

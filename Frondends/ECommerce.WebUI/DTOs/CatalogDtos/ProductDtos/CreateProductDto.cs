@@ -1,8 +1,7 @@
-﻿namespace ECommerce.Catalog.DTOs.ProductDTOs
+﻿namespace ECommerce.WebUI.DTOs.CatalogDtos.ProductDtos
 {
-    public class UpdateProductDto
-    { 
-        public string Id { get; set; }
+    public class CreateProductDto
+    {
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
