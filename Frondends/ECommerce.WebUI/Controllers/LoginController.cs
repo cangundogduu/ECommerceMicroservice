@@ -22,9 +22,9 @@ namespace ECommerce.WebUI.Controllers
                 return View(signInDto);
             }
 
-            var user = _contextAccessor.HttpContext.User.Claims;
+            //var user = _contextAccessor.HttpContext.User.Claims;
 
-            var count = 0;
+            //var count = 0;
 
             return RedirectToAction("Index", "Category");
 

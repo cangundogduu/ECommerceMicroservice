@@ -1,4 +1,5 @@
 ﻿using ECommerce.Basket.DTOs;
+using StackExchange.Redis;
 using System.Text.Json;
 
 namespace ECommerce.Basket.Services.BasketServices
@@ -16,7 +17,17 @@ namespace ECommerce.Basket.Services.BasketServices
         {
             var existBasket = await _redisService.GetDb().StringGetAsync(userId);
 
-            return JsonSerializer.Deserialize<BasketDto>(existBasket);
+            if (existBasket != RedisValue.Null)
+            {
+                return JsonSerializer.Deserialize<BasketDto>(existBasket);
+            }
+
+            return new BasketDto
+            {
+                UserId = userId,
+                BasketItems = new List<BasketItemDto>()
+            };
+
         }
 
         public async Task SaveorUpdateAsync(BasketDto basketDto)

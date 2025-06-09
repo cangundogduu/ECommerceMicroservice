@@ -7,9 +7,10 @@ namespace ECommerce.WebUI.Controllers
 {
     public class BasketController(IProductService _productService,IBasketService _basketService) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var basket = await _basketService.GetBasketAsync();
+            return View(basket);
         }
 
 
@@ -26,7 +27,7 @@ namespace ECommerce.WebUI.Controllers
             };
 
             await _basketService.AddBasketItemAsync(basketItem);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Basket");
         }
     }
 }

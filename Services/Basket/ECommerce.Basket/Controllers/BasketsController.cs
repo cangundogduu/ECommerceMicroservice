@@ -1,11 +1,13 @@
 ﻿using ECommerce.Basket.DTOs;
 using ECommerce.Basket.Services.BasketServices;
 using ECommerce.Basket.Services.UserServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Basket.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BasketsController(IBasketService _basketService,IUserService _userService) : ControllerBase
@@ -14,6 +16,7 @@ namespace ECommerce.Basket.Controllers
         public async Task<IActionResult> GetBasket()
         {
             var userId = _userService.GetUserId;
+
             var values = await _basketService.GetBasketAsync(userId);
             return Ok(values);
         }
@@ -21,11 +24,12 @@ namespace ECommerce.Basket.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveOrUpdateBasket(BasketDto basketDto)
         {
+            basketDto.UserId = _userService.GetUserId;
             await _basketService.SaveorUpdateAsync(basketDto);
             return Ok("Basket created/updated successfully. ");
         }
 
-        [HttpDelete("{userId}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteBasket()
         {
             var userId = _userService.GetUserId;

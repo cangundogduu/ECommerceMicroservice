@@ -7,10 +7,19 @@ namespace ECommerce.WebUI.Services.BasketServices
         public async Task AddBasketItemAsync(BasketItemDto basketItemDto)
         {
             var basket = await GetBasketAsync();
-            if (basket != null)
+            var existProduct = basket.BasketItems.Select(x => x.ProductId == basketItemDto.ProductId).FirstOrDefault();
+            if (existProduct)
+            {
+                var item = basket.BasketItems.FirstOrDefault(x => x.ProductId == basketItemDto.ProductId);
+                item.Quantity += 1;
+                await SaveBasketAsync(basket);
+            }
+            else
             {
                 basket.BasketItems.Add(basketItemDto);
+                await SaveBasketAsync(basket);
             }
+
 
             await SaveBasketAsync(basket);
 
